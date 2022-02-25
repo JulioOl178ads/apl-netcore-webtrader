@@ -21,8 +21,8 @@ namespace WebTrader.Controllers
         public static ProductModel[] InitializeData()
         {
             List<ProductModel> products = new List<ProductModel>();
-            ProductModel product1 = new ProductModel("nome1", "precoMercado1", "precoDesejado1", "marca1", "modelo1");
-            ProductModel product2 = new ProductModel("nome2", "precoMercado2", "precoDesejado2", "marca2", "modelo2");
+            ProductModel product1 = new ProductModel("S20", "2.400,00", "1.000,00", "Samsung", "S20FE");
+            ProductModel product2 = new ProductModel("PS5", "4.300,00", "3.400,00", "Sony", "Antigo");
             products.Add(product1);
             products.Add(product2);
 

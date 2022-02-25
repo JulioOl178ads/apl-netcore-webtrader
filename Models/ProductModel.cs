@@ -10,8 +10,8 @@ namespace WebTrader.Models
         public ProductModel(string nome, string precoMercado, string precoDesejado, string marca, string modelo)
         {
             Nome = nome;
-            PrecoMercado = precoMercado;
-            PrecoDesejado = precoDesejado;
+            PrecoMercado = "R$ " + precoMercado;
+            PrecoDesejado = "R$ " + precoDesejado;
             Marca = marca;
             Modelo = modelo;
         }
