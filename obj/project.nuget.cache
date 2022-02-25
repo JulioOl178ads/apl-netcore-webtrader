@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7OMeWnW29NT8caVHSRFw44XP/1+fkEjUfkSRpgPwN4mpn4YcZNUp0o+HnDDix7uOb7EogQhC+Df+20z3cY4D5w==",
+  "dgSpecHash": "aPE+qTzAwFQIDKWxY28LrM23OUnOnkALI6NZiBNDyO2DsIPu766AWJUD1dV9fPRBeYSu+Q9VnI9j5tVgCv2s4w==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\WebTrader\\WebTrader\\WebTrader.csproj",
+  "projectFilePath": "C:\\Projetos\\apl-netcore-webtrader\\WebTrader.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\julio\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\3.1.17\\microsoft.aspnetcore.mvc.razor.extensions.3.1.17.nupkg.sha512",
     "C:\\Users\\julio\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\3.1.17\\microsoft.aspnetcore.mvc.razor.runtimecompilation.3.1.17.nupkg.sha512",

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Controle";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Página Inicial</h1>
+
+    <table>
+        <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Nome</th>
+            <th>Preco no Mercado</th>
+            <th>Preco Desejado</th>
+        </tr>
+
+        @foreach (var productItem in ViewBag.Products)
+        {
+            <tr>
+                <td>@productItem.Marca</td>
+                <td>@productItem.Modelo</td>
+                <td>@productItem.Nome</td>
+                <td>@productItem.PrecoMercado</td>
+                <td>@productItem.PrecoDesejado</td>
+            </tr>
+        }
+    </table>
+</div>

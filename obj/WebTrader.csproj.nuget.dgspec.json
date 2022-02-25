@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projetos\\WebTrader\\WebTrader\\WebTrader.csproj": {}
+    "C:\\Projetos\\apl-netcore-webtrader\\WebTrader.csproj": {}
   },
   "projects": {
-    "C:\\Projetos\\WebTrader\\WebTrader\\WebTrader.csproj": {
+    "C:\\Projetos\\apl-netcore-webtrader\\WebTrader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projetos\\WebTrader\\WebTrader\\WebTrader.csproj",
+        "projectUniqueName": "C:\\Projetos\\apl-netcore-webtrader\\WebTrader.csproj",
         "projectName": "WebTrader",
-        "projectPath": "C:\\Projetos\\WebTrader\\WebTrader\\WebTrader.csproj",
+        "projectPath": "C:\\Projetos\\apl-netcore-webtrader\\WebTrader.csproj",
         "packagesPath": "C:\\Users\\julio\\.nuget\\packages\\",
-        "outputPath": "C:\\Projetos\\WebTrader\\WebTrader\\obj\\",
+        "outputPath": "C:\\Projetos\\apl-netcore-webtrader\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\julio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }
