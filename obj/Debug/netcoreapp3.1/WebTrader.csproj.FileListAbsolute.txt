@@ -707,3 +707,4 @@ C:\Projetos\apl-netcore-webtrader\obj\Debug\netcoreapp3.1\WebTrader.dll
 C:\Projetos\apl-netcore-webtrader\obj\Debug\netcoreapp3.1\WebTrader.pdb
 C:\Projetos\apl-netcore-webtrader\obj\Debug\netcoreapp3.1\WebTrader.genruntimeconfig.cache
 C:\Projetos\apl-netcore-webtrader\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
+C:\Projetos\apl-netcore-webtrader\obj\Debug\netcoreapp3.1\Razor\Views\Product\_FormProducts.cshtml.g.cs

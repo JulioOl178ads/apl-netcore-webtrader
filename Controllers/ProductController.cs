@@ -18,18 +18,11 @@ namespace WebTrader.Controllers
         {
             _logger = logger;
             this.Products = new List<ProductModel>();
-            ProductModel product1 = new ProductModel("S20", "2.400,00", "1.000,00", "Samsung", "S20FE");
-            ProductModel product2 = new ProductModel("PS5", "4.300,00", "3.400,00", "Sony", "Antigo");
+            ProductModel product1 = new ProductModel(1, "S20", "2.400,00", "1.000,00", "Samsung", "S20FE");
+            ProductModel product2 = new ProductModel(2, "PS5", "4.300,00", "3.400,00", "Sony", "Antigo");
             this.Products.Add(product1);
             this.Products.Add(product2);
         }
-
-        //public static ProductModel[] InitializeData()
-        //{
-        //
-        //
-        //    return products.ToArray();
-        //}
 
         public IActionResult Index()
         {
@@ -39,8 +32,14 @@ namespace WebTrader.Controllers
 
         public IActionResult Incluir(ProductModel product)
         {
+            product.IdProduct = 3;
             this.Products.Add(product);
             ViewBag.Products = this.Products;
+            return View("index");
+        }
+
+        public IActionResult Alterar(int idProduct)
+        {
             return View("index");
         }
     }

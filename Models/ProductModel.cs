@@ -7,8 +7,9 @@ namespace WebTrader.Models
 {
     public class ProductModel
     {
-        public ProductModel(string nome, string precoMercado, string precoDesejado, string marca, string modelo)
+        public ProductModel(int idProduct, string nome, string precoMercado, string precoDesejado, string marca, string modelo)
         {
+            IdProduct = 1;
             Nome = nome;
             PrecoMercado = "R$ " + precoMercado;
             PrecoDesejado = "R$ " + precoDesejado;
@@ -20,6 +21,7 @@ namespace WebTrader.Models
         {
         }
 
+        public int IdProduct { get; set; }
         public string Nome { get; set; }
         public string PrecoMercado { get; set; }
         public string PrecoDesejado { get; set; }
