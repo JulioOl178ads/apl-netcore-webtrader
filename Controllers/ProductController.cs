@@ -12,27 +12,36 @@ namespace WebTrader.Controllers
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
+        private List<ProductModel> Products { get; set; }
 
         public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
-        }
-
-        public static ProductModel[] InitializeData()
-        {
-            List<ProductModel> products = new List<ProductModel>();
+            this.Products = new List<ProductModel>();
             ProductModel product1 = new ProductModel("S20", "2.400,00", "1.000,00", "Samsung", "S20FE");
             ProductModel product2 = new ProductModel("PS5", "4.300,00", "3.400,00", "Sony", "Antigo");
-            products.Add(product1);
-            products.Add(product2);
-
-            return products.ToArray();
+            this.Products.Add(product1);
+            this.Products.Add(product2);
         }
+
+        //public static ProductModel[] InitializeData()
+        //{
+        //
+        //
+        //    return products.ToArray();
+        //}
 
         public IActionResult Index()
         {
-            ViewBag.Products = InitializeData();
+            ViewBag.Products = this.Products;
             return View();
+        }
+
+        public IActionResult Incluir(ProductModel product)
+        {
+            this.Products.Add(product);
+            ViewBag.Products = this.Products;
+            return View("index");
         }
     }
 }

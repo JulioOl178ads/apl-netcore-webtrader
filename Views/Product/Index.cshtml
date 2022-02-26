@@ -2,7 +2,7 @@
     ViewData["Title"] = "Controle";
 }
 
-<h1 class="display-4">Test</h1>
+<h1 class="display-4">Consulta</h1>
 <div class="text-center">
     <table class="table">
         <thead>
@@ -28,3 +28,41 @@
         </tbody>
     </table>
 </div>
+
+<h1>Inclusão</h1>
+<form action="/Product/Incluir" method="post">
+
+    <div class="form-group">
+        <label>Marca:</label>
+        <input type="text" name="marca" class="form-control" id="txtMarca" aria-describedby="Digite a Marca de seu produto" placeholder="Marca">
+        <small id="smalltxtMarca" class="form-text text-muted">"Digite a Marca de seu produto."</small>
+    </div>
+
+    <div class="form-group">
+        <label>Modelo:</label>
+        <input type="text" name="modelo" class="form-control" id="txtModelo" aria-describedby="Digite o Modelo de seu produto" placeholder="Modelo">
+        <small id="smalltxtModelo" class="form-text text-muted">"Digite o Modelo de seu Produto."</small>
+    </div>
+
+    <div class="form-group">
+        <label>Nome:</label>
+        <input type="text" name="nome" class="form-control" id="txtNome" aria-describedby="Digite o Nome de seu produto" placeholder="Nome">
+        <small id="smalltxtNome" class="form-text text-muted">"Digite o Nome de seu Produto."</small>
+    </div>
+
+    <div class="form-group">
+        <label>Preço de Mercado:</label>
+        <input type="text" name="precomercado" class="form-control" id="txtPrecoMercado" aria-describedby="Digite o Preco de Mercado do Produto" placeholder="Preco de Mercado">
+        <small id="smalltxtPrecoMercado" class="form-text text-muted">"Digite o Preco de Mercado de seu Produto."</small>
+    </div>
+
+    <div class="form-group">
+        <label>Preço do Peoduto:</label>
+        <input type="text" name="precodesejado" class="form-control" id="txtPrecoDesejado" aria-describedby="Digite o Preco desejado do Produto" placeholder="Preco desejado">
+        <small id="smalltxtPrecoDesejado" class="form-text text-muted">"Digite o Preco de Mercado de seu Produto."</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<h1>Update</h1>

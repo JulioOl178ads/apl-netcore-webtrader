@@ -16,6 +16,10 @@ namespace WebTrader.Models
             Modelo = modelo;
         }
 
+        public ProductModel()
+        {
+        }
+
         public string Nome { get; set; }
         public string PrecoMercado { get; set; }
         public string PrecoDesejado { get; set; }
