@@ -12,8 +12,8 @@ using WebTrader.Context;
 namespace WebTrader.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220422021243_test")]
-    partial class test
+    [Migration("20220425020811_insert_tipo_contato")]
+    partial class insert_tipo_contato
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,29 @@ namespace WebTrader.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("WebTrader.Models.Categoria", b =>
+                {
+                    b.Property<int>("CategoriaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoriaId"), 1L, 1);
+
+                    b.Property<string>("CategoriaNome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR2(100)");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("NVARCHAR2(200)");
+
+                    b.HasKey("CategoriaId");
+
+                    b.ToTable("Categorias");
+                });
 
             modelBuilder.Entity("WebTrader.Models.Dominio.T_Endereco", b =>
                 {
@@ -70,6 +93,56 @@ namespace WebTrader.Migrations
                     b.ToTable("T_Endereco");
                 });
 
+            modelBuilder.Entity("WebTrader.Models.Lanche", b =>
+                {
+                    b.Property<int>("LancheId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LancheId"), 1L, 1);
+
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("DescricaoCurta")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("NVARCHAR2(200)");
+
+                    b.Property<string>("DescricaoDetalhada")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("NVARCHAR2(200)");
+
+                    b.Property<bool>("EmEstoque")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<string>("ImagemThumbnailUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("NVARCHAR2(200)");
+
+                    b.Property<string>("ImagemUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("NVARCHAR2(200)");
+
+                    b.Property<bool>("IsLanchePreferido")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("NVARCHAR2(80)");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("LancheId");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Lanches");
+                });
+
             modelBuilder.Entity("WebTrader.Models.T_Contato", b =>
                 {
                     b.Property<int>("IdContato")
@@ -86,17 +159,12 @@ namespace WebTrader.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("NVARCHAR2(25)");
 
-                    b.Property<int?>("T_Tipo_EnderecoIdEndereco")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int?>("TipoContatoIdContato")
+                    b.Property<int?>("TipoContatoIdTipoContato")
                         .HasColumnType("NUMBER(10)");
 
                     b.HasKey("IdContato");
 
-                    b.HasIndex("T_Tipo_EnderecoIdEndereco");
-
-                    b.HasIndex("TipoContatoIdContato");
+                    b.HasIndex("TipoContatoIdTipoContato");
 
                     b.ToTable("T_Contato");
                 });
@@ -147,61 +215,43 @@ namespace WebTrader.Migrations
                     b.Property<int?>("TipoProdutoIdTipoProduto")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int?>("UsuarioIdUsuario")
                         .HasColumnType("NUMBER(10)");
 
                     b.HasKey("IdPropostaNegociacao");
 
                     b.HasIndex("TipoProdutoIdTipoProduto");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuarioIdUsuario");
 
                     b.ToTable("T_Proposta_Negociacao");
                 });
 
             modelBuilder.Entity("WebTrader.Models.T_Tipo_Contato", b =>
                 {
-                    b.Property<int>("IdContato")
+                    b.Property<int>("IdTipoContato")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdContato"), 1L, 1);
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTipoContato"), 1L, 1);
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("NVARCHAR2(200)");
 
-                    b.HasKey("IdContato");
+                    b.HasKey("IdTipoContato");
 
                     b.ToTable("T_Tipo_Contato");
                 });
 
-            modelBuilder.Entity("WebTrader.Models.T_Tipo_Endereco", b =>
-                {
-                    b.Property<int>("IdEndereco")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
-
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEndereco"), 1L, 1);
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("NVARCHAR2(200)");
-
-                    b.HasKey("IdEndereco");
-
-                    b.ToTable("T_Tipo_Endereco");
-                });
-
             modelBuilder.Entity("WebTrader.Models.T_Usuario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"), 1L, 1);
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -234,7 +284,7 @@ namespace WebTrader.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("NVARCHAR2(200)");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdUsuario");
 
                     b.HasIndex("ContatosIdContato");
 
@@ -261,15 +311,22 @@ namespace WebTrader.Migrations
                     b.ToTable("T_Tipo_Produto");
                 });
 
+            modelBuilder.Entity("WebTrader.Models.Lanche", b =>
+                {
+                    b.HasOne("WebTrader.Models.Categoria", "Categoria")
+                        .WithMany("Lanches")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+                });
+
             modelBuilder.Entity("WebTrader.Models.T_Contato", b =>
                 {
-                    b.HasOne("WebTrader.Models.T_Tipo_Endereco", null)
-                        .WithMany("Contatos")
-                        .HasForeignKey("T_Tipo_EnderecoIdEndereco");
-
                     b.HasOne("WebTrader.Models.T_Tipo_Contato", "TipoContato")
-                        .WithMany("Contatos")
-                        .HasForeignKey("TipoContatoIdContato");
+                        .WithMany("Contato")
+                        .HasForeignKey("TipoContatoIdTipoContato");
 
                     b.Navigation("TipoContato");
                 });
@@ -277,12 +334,12 @@ namespace WebTrader.Migrations
             modelBuilder.Entity("WebTrader.Models.T_Proposta_Negociacao", b =>
                 {
                     b.HasOne("WebTrader.Models.Tipo.T_Tipo_Produto", "TipoProduto")
-                        .WithMany("TiposProduto")
+                        .WithMany("PropostaNegociacao")
                         .HasForeignKey("TipoProdutoIdTipoProduto");
 
                     b.HasOne("WebTrader.Models.T_Usuario", "Usuario")
-                        .WithMany("Propostas")
-                        .HasForeignKey("UsuarioId");
+                        .WithMany("PropostaNegociacao")
+                        .HasForeignKey("UsuarioIdUsuario");
 
                     b.Navigation("TipoProduto");
 
@@ -304,6 +361,11 @@ namespace WebTrader.Migrations
                     b.Navigation("Enderecos");
                 });
 
+            modelBuilder.Entity("WebTrader.Models.Categoria", b =>
+                {
+                    b.Navigation("Lanches");
+                });
+
             modelBuilder.Entity("WebTrader.Models.Dominio.T_Endereco", b =>
                 {
                     b.Navigation("Usuario");
@@ -316,22 +378,17 @@ namespace WebTrader.Migrations
 
             modelBuilder.Entity("WebTrader.Models.T_Tipo_Contato", b =>
                 {
-                    b.Navigation("Contatos");
-                });
-
-            modelBuilder.Entity("WebTrader.Models.T_Tipo_Endereco", b =>
-                {
-                    b.Navigation("Contatos");
+                    b.Navigation("Contato");
                 });
 
             modelBuilder.Entity("WebTrader.Models.T_Usuario", b =>
                 {
-                    b.Navigation("Propostas");
+                    b.Navigation("PropostaNegociacao");
                 });
 
             modelBuilder.Entity("WebTrader.Models.Tipo.T_Tipo_Produto", b =>
                 {
-                    b.Navigation("TiposProduto");
+                    b.Navigation("PropostaNegociacao");
                 });
 #pragma warning restore 612, 618
         }

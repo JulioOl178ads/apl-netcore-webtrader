@@ -9,7 +9,7 @@ namespace WebTrader.Models
     public class T_Usuario
     {
         [Key]
-        public int Id { get; set; }
+        public int IdUsuario { get; set; }
 
         [Required(ErrorMessage = "Descrição do Nome do usuário")]
         [Display(Name = "Descrição do Nome")]
@@ -36,10 +36,7 @@ namespace WebTrader.Models
         [MaxLength(200, ErrorMessage = "Descrição deve ter no máximo {1} caracteres")]
         public string RG { get; set; }        
 
-
-        public virtual T_Contato Contatos { get; set; }
-        public virtual T_Endereco Enderecos { get; set; }
-        public List<T_Proposta_Negociacao> Propostas { get; set; }
+        public List<T_Proposta_Negociacao> PropostaNegociacao { get; set; }
 
     }
 }

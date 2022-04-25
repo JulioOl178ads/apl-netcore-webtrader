@@ -15,6 +15,6 @@ namespace WebTrader.Models.Tipo
         [MaxLength(200, ErrorMessage = "Descrição deve ter no máximo {1} caracteres")]
         public string Descricao { get; set; }
 
-        public List<T_Proposta_Negociacao> TiposProduto { get; set; }
+        public List<T_Proposta_Negociacao> PropostaNegociacao { get; set; }
     }
 }

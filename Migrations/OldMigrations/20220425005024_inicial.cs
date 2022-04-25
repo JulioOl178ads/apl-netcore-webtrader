@@ -4,10 +4,24 @@
 
 namespace WebTrader.Migrations
 {
-    public partial class test : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categorias",
+                columns: table => new
+                {
+                    CategoriaId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                        .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
+                    CategoriaNome = table.Column<string>(type: "NVARCHAR2(100)", maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categorias", x => x.CategoriaId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "T_Endereco",
                 columns: table => new
@@ -31,26 +45,26 @@ namespace WebTrader.Migrations
                 name: "T_Tipo_Contato",
                 columns: table => new
                 {
-                    IdContato = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    IdTipoContato = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     Descricao = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Tipo_Contato", x => x.IdContato);
+                    table.PrimaryKey("PK_T_Tipo_Contato", x => x.IdTipoContato);
                 });
 
             migrationBuilder.CreateTable(
                 name: "T_Tipo_Endereco",
                 columns: table => new
                 {
-                    IdEndereco = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    IdTipoEndereco = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     Descricao = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Tipo_Endereco", x => x.IdEndereco);
+                    table.PrimaryKey("PK_T_Tipo_Endereco", x => x.IdTipoEndereco);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,6 +81,33 @@ namespace WebTrader.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Lanches",
+                columns: table => new
+                {
+                    LancheId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                        .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
+                    Nome = table.Column<string>(type: "NVARCHAR2(80)", maxLength: 80, nullable: false),
+                    DescricaoCurta = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false),
+                    DescricaoDetalhada = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    ImagemUrl = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: true),
+                    ImagemThumbnailUrl = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: true),
+                    IsLanchePreferido = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    EmEstoque = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    CategoriaId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lanches", x => x.LancheId);
+                    table.ForeignKey(
+                        name: "FK_Lanches_Categorias_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categorias",
+                        principalColumn: "CategoriaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "T_Contato",
                 columns: table => new
                 {
@@ -74,29 +115,29 @@ namespace WebTrader.Migrations
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     DescricaoContato = table.Column<string>(type: "NVARCHAR2(25)", maxLength: 25, nullable: false),
                     Ativo = table.Column<bool>(type: "NUMBER(1)", nullable: false),
-                    TipoContatoIdContato = table.Column<int>(type: "NUMBER(10)", nullable: true),
-                    T_Tipo_EnderecoIdEndereco = table.Column<int>(type: "NUMBER(10)", nullable: true)
+                    TipoContatoIdTipoContato = table.Column<int>(type: "NUMBER(10)", nullable: true),
+                    T_Tipo_EnderecoIdTipoEndereco = table.Column<int>(type: "NUMBER(10)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_T_Contato", x => x.IdContato);
                     table.ForeignKey(
-                        name: "FK_T_Contato_T_Tipo_Contato_TipoContatoIdContato",
-                        column: x => x.TipoContatoIdContato,
+                        name: "FK_T_Contato_T_Tipo_Contato_TipoContatoIdTipoContato",
+                        column: x => x.TipoContatoIdTipoContato,
                         principalTable: "T_Tipo_Contato",
-                        principalColumn: "IdContato");
+                        principalColumn: "IdTipoContato");
                     table.ForeignKey(
-                        name: "FK_T_Contato_T_Tipo_Endereco_T_Tipo_EnderecoIdEndereco",
-                        column: x => x.T_Tipo_EnderecoIdEndereco,
+                        name: "FK_T_Contato_T_Tipo_Endereco_T_Tipo_EnderecoIdTipoEndereco",
+                        column: x => x.T_Tipo_EnderecoIdTipoEndereco,
                         principalTable: "T_Tipo_Endereco",
-                        principalColumn: "IdEndereco");
+                        principalColumn: "IdTipoEndereco");
                 });
 
             migrationBuilder.CreateTable(
                 name: "T_Usuario",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    IdUsuario = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     Nome = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false),
                     Idade = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false),
@@ -108,7 +149,7 @@ namespace WebTrader.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_T_Usuario", x => x.IdUsuario);
                     table.ForeignKey(
                         name: "FK_T_Usuario_T_Contato_ContatosIdContato",
                         column: x => x.ContatosIdContato,
@@ -135,7 +176,7 @@ namespace WebTrader.Migrations
                     Empresa = table.Column<string>(type: "NVARCHAR2(50)", maxLength: 50, nullable: true),
                     DescricaoCurta = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: false),
                     ImagemThumbnailUrl = table.Column<string>(type: "NVARCHAR2(200)", maxLength: 200, nullable: true),
-                    UsuarioId = table.Column<int>(type: "NUMBER(10)", nullable: true),
+                    UsuarioIdUsuario = table.Column<int>(type: "NUMBER(10)", nullable: true),
                     TipoProdutoIdTipoProduto = table.Column<int>(type: "NUMBER(10)", nullable: true)
                 },
                 constraints: table =>
@@ -147,21 +188,26 @@ namespace WebTrader.Migrations
                         principalTable: "T_Tipo_Produto",
                         principalColumn: "IdTipoProduto");
                     table.ForeignKey(
-                        name: "FK_T_Proposta_Negociacao_T_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_T_Proposta_Negociacao_T_Usuario_UsuarioIdUsuario",
+                        column: x => x.UsuarioIdUsuario,
                         principalTable: "T_Usuario",
-                        principalColumn: "Id");
+                        principalColumn: "IdUsuario");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_T_Contato_T_Tipo_EnderecoIdEndereco",
-                table: "T_Contato",
-                column: "T_Tipo_EnderecoIdEndereco");
+                name: "IX_Lanches_CategoriaId",
+                table: "Lanches",
+                column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_T_Contato_TipoContatoIdContato",
+                name: "IX_T_Contato_T_Tipo_EnderecoIdTipoEndereco",
                 table: "T_Contato",
-                column: "TipoContatoIdContato");
+                column: "T_Tipo_EnderecoIdTipoEndereco");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_T_Contato_TipoContatoIdTipoContato",
+                table: "T_Contato",
+                column: "TipoContatoIdTipoContato");
 
             migrationBuilder.CreateIndex(
                 name: "IX_T_Proposta_Negociacao_TipoProdutoIdTipoProduto",
@@ -169,9 +215,9 @@ namespace WebTrader.Migrations
                 column: "TipoProdutoIdTipoProduto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_T_Proposta_Negociacao_UsuarioId",
+                name: "IX_T_Proposta_Negociacao_UsuarioIdUsuario",
                 table: "T_Proposta_Negociacao",
-                column: "UsuarioId");
+                column: "UsuarioIdUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_T_Usuario_ContatosIdContato",
@@ -187,7 +233,13 @@ namespace WebTrader.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Lanches");
+
+            migrationBuilder.DropTable(
                 name: "T_Proposta_Negociacao");
+
+            migrationBuilder.DropTable(
+                name: "Categorias");
 
             migrationBuilder.DropTable(
                 name: "T_Tipo_Produto");
